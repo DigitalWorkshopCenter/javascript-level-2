@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<link href="map.css" rel="stlyesheet" type="text/css">
+    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+		<script src="https://www.amcharts.com/lib/3/maps/js/usa2Low.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<style>
+				#map {
+				width: 100%;
+				height: 400px;
+			}						
+			
+			
+			.error {
+					color:red;
+			}
+			</style>
+	</head>
+	<body>
+    <table id="table">
+        <tr>
+            <td>City Name</td>
+            <td>Country</td>
+            <td>Description</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td><input type="text" id="city"></td>
+            <td><input type="text" id="state"></td>
+            <td><input type="text" id="description"></td>
+            <td><button id="add">Add</button></td>
+        </tr>
+
+    </table>
+    <div id="error"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+		<div id="map"></div>
+		<script src="map.js"></script>
+	</body>		
+</html>

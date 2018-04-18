@@ -1,0 +1,51 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h2>Hello!</h2>
+        <div id="geolocation"></div>
+
+        <script>
+       //get the users latitude and longitude display in a div
+        var geolocation = document.getElementById('geolocation');
+        console.log(geolocation);
+
+        function geoLocation() {
+            //check if the browser supports geolocation
+            if(navigator.geolocation) {
+                //get the latitude and longitude
+                console.log(navigator.geolocation.getCurrentPosition(showPosition,showError));
+            } else {
+                geolocation.innerHTML = "Geolocation is not supported."
+            }
+        }     
+
+        geoLocation();
+
+        function showPosition(position){
+            var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						var latlon = latitude+','+longitude;
+						var mapImage = "https://maps.googleapis.com/maps/api/staticmap?center="
+		+latlon+"&zoom=14&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
+						console.log(mapImage);
+						geolocation.innerHTML = '<img src="'+mapImage+'">';
+						
+           console.log(position);
+        }
+
+        function showError(error) {
+					console.log(error.code);
+					switch(error.code) {
+							case error.PERMISSION_DENIED:
+							geolocation.innerHTML = 'User denied the request for Geolocation';
+
+							case error.PERMISSION_UNAVAILABLE:
+							geolocation.innerHTML = 'Location unavailable';
+					}
+        }
+            
+        </script>
+    </body>
+</html>

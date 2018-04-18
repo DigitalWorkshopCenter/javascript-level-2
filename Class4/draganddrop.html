@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            #div1 {
+            height:70px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+            overflow: hidden;
+            }
+            #div2 {
+            height:70px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+            overflow: hidden;
+            }            
+        </style>
+    </head>
+    <body>
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <img id="drag1" src="bunny.jpg" draggable="true" ondragstart="drag(event)">
+        <img id="drag2" src="bunny2.jpg" draggable="true" ondragstart="drag(event)">
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <script>
+            function drag(event) {
+                console.log(this);
+                console.log(event);
+                event.dataTransfer.setData("text",event.target.id);
+            }
+
+            function drop(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("text");
+                event.target.appendChild(document.getElementById(data));
+            }
+
+            function allowDrop(event){
+                event.preventDefault();
+            }
+        </script>
+    </body>
+</html>

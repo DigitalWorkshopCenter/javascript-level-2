@@ -1,0 +1,28 @@
+<html>
+    <body>
+        <h1>Local Storage</h1>
+
+
+        <div id="name"></div>
+        <script>
+            //store data in local storage
+            
+            //add an item to local storage
+            //localStorage.firstName = 'Christine';
+            //localStorage.setItem('firstName','Christine');
+            
+            //get an item from local storage
+            console.log(localStorage.getItem('firstName'));
+
+            var name = document.getElementById('name');
+            //console.log(name);
+            name.innerHTML = 'test';
+
+            //remove an item from local storage
+            //localStorage.removeItem('firstName');
+
+            //sessionStorage.address = 'Fort Collins';
+            console.log(sessionStorage.getItem('address'));
+        </script>
+    </body>
+</html>
