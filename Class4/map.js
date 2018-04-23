@@ -14,7 +14,7 @@ var tr = createTableRow(locations);
 
 //add tr to table
 var table = document.getElementById('table');
-table.appendChild(tr);
+//table.appendChild(tr);
 
 
 
@@ -165,7 +165,7 @@ function createTableRow(data) {
 		for (var value in data[i]) {
 			var td = document.createElement('td');
 			td.innerHTML = data[i][value];
-			tr.appendChild(td);
+		//	tr.appendChild(td);
 		}
 
 		console.log(tr);

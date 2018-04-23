@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="result"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+            $.ajax({
+              url: "cities.json",
+              dataType: "json",
+              success: function (result) {
+                console.log(result);
+              },
+              error: function(error) {
+                console.log(error.responseText);
+              }
+            });
+
+          // $.get("cities.json", function (data, status) {
+          //   console.log(data);
+          // });
+    </script>
+  </body>
+</html>

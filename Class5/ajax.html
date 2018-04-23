@@ -1,0 +1,20 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <div id="response"></div>
+    <script>
+      var ajax = new XMLHttpRequest;
+        //access across domains - bad
+        ajax.onreadystatechange = function () {
+          if ((this.readyState == 4) && (this.status == 200)) {
+            console.log(this.responseText);
+          }
+        };
+        ajax.open("GET", "cities.json", true);
+        ajax.send();  
+
+    </script>
+  </body>
+</html>
