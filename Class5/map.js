@@ -99,9 +99,7 @@ add.addEventListener('click', function () {
 
       //add tr to table
       var table = document.getElementById('table');
-      for (var i = 0; i < tr.length; i++) {
-        table.appendChild(tr[i]);
-      }
+      table.appendChild(tr[0]);
 
       //create marker object
       var marker = {
