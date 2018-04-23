@@ -1,0 +1,69 @@
+<html>
+    <body>
+            <form class="search-form">
+                    <input type="text" id="searchInput" class="search" placeholder="City or State">
+                    <ul class="suggestions">
+                      <li>Filter for a city</li>
+                      <li>or a state</li>
+                    </ul>
+                    <p id="results">
+
+                    </p>
+                  </form>
+        <script>
+            
+            const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+            const cities = [];
+
+            //grab the data from the endpoint
+            fetch(endpoint)
+                .then(blob => blob.json()) //tell the data that its json
+                .then(blob => cities.push(...blob)); //do something with the data
+
+
+
+            function findMatches(wordToMatch,cities) {
+                return cities.filter(place => {
+                    const regex = new RegExp(wordToMatch,'gi');
+                    return place.city.match(regex);
+                });
+            }
+
+            function displayMatches(event) {
+                const results = document.getElementById('results');
+                const matchArray = findMatches(this.value,cities);
+                // let resultText = '';
+                // for(let i=0; i < matchArray.length; i++) {
+                //     let city = matchArray[i].city;
+                //     let latitude = matchArray[i].latitude;
+                //     let longitude = matchArray[i].longitude;
+                //     // let text = 'City: '+city+' Latitude: '+latitude+' Longitude: '+longitude+'<br>';
+
+                //     let text = `City: ${city} 
+                //                 Latitude: ${latitude} 
+                //                 Longitude: ${longitude}<br>`;
+                    
+
+                //     resultText = resultText+text;
+                // }
+                
+                const resultText = matchArray.map(place =>{
+                    let city = place.city;
+                    let latitude = place.latitude;
+                    let longitude = place.longitude;
+                    
+
+                    return `City: ${city}  Latitude: ${latitude}  Longitude: "${longitude}"<br/>`;
+                });
+
+                results.innerHTML = resultText;
+            }
+
+
+            var searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keyup',displayMatches);
+
+        </script>
+    </body>
+</html>

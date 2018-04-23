@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h2>Ajax Example</h2>
+    </body>
+    <script>
+        var ajax = new XMLHttpRequest;
+        ajax.onreadystatechange = function() {
+            if ((this.readyState == 4) && (this.status == 200)) {
+                console.log(JSON.parse(this.responseText));
+            }
+           
+        }
+        ajax.open('GET','cities.json',true);
+        ajax.send();
+    </script>
+</html>
