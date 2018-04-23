@@ -26,9 +26,18 @@ for(var i = 0; i < trs.length; i++) {
 
 //add a listener
 var add = document.getElementById('add');
-add.addEventListener('click', function () {
 
 
+function addLocation(coordinates = '') {
+
+  //check if coordinates are passed through
+  if (coordinates !== '') {
+
+  } else {
+
+  }
+  console.log(coordinates);
+  
   //grab values from input
   var city = document.getElementById('city').value;
   var state = document.getElementById('state').value;
@@ -37,15 +46,34 @@ add.addEventListener('click', function () {
   //var longitude = Number(document.getElementById('longitude').value);
 
 
-  //calculate lat and lng
-  //get the latitude and longitude from google api
-  var apiKey = "AIzaSyB9GYqbnSsZThqBHahtV4XIczm1JR-lXaA";
+  function googleLocation(city,state) {
+      //calculate lat and lng
+    //get the latitude and longitude from google api
+    var apiKey = "AIzaSyB9GYqbnSsZThqBHahtV4XIczm1JR-lXaA";
 
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '+' + state + '&key=' + apiKey;
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '+' + state + '&key=' + apiKey;
 
-  $.get(url, function (data) {
-    var latitude = data.results[0].geometry.location.lat;
-    var longitude = data.results[0].geometry.location.lng;
+    var coordinates = {};
+
+    $.get(url, function (data) {
+      coordinates.latitude = data.results[0].geometry.location.lat;
+      coordinates.longitude = data.results[0].geometry.location.lng;
+    });
+
+    return coordinates;
+  }
+
+  var googleCoordinates = googleLocation(city,state);
+
+  console.log('google');
+  console.log(googleCoordinates.latitude);
+
+
+
+
+
+    var latitude = googleCoordinates.latitude;
+    var longitude = googleCoordinates.longitude;
 
     //add validation 
     //check that the fields arent empty
@@ -109,7 +137,7 @@ add.addEventListener('click', function () {
         "latitude": latitude,
         "longitude": longitude
       };
-      console.log(marker);
+      //console.log(marker);
       //add the marker to the maps images array
       map.dataProvider.images.push(marker);
       map.validateData();
@@ -124,10 +152,9 @@ add.addEventListener('click', function () {
       error.appendChild(message);
     }
 
-    //end jquery get
-  });
-  //end click listener
-});
+}
+
+add.addEventListener('click', addLocation);
 
 
 
@@ -165,7 +192,7 @@ var map = AmCharts.makeChart("map", {
 
 function createTableRow(data) {
   var trs = [];
-  console.log(data);
+  //console.log(data);
   //loop through the data and create the tds
   for (var i = 0; i < data.length; i++) {
     //creating the table row
@@ -176,10 +203,41 @@ function createTableRow(data) {
       tr.appendChild(td);
     }
 
-    console.log(tr);
+    //console.log(tr);
     trs.push(tr);
   }
-  console.log(trs);
+  //console.log(trs);
   return trs;
 }
 
+//add current location button
+var addlocation = document.getElementById('addlocation');
+addlocation.addEventListener('click',function(){
+  //get the current location
+  var coordinates = {};
+
+ navigator.geolocation.getCurrentPosition(function(position){
+   coordinates.latitude = position.coords.latitude;
+   coordinates.longitude = position.coords.longitude
+  });
+
+  //console.log(coordinates);
+
+  //add it to the table
+  addLocation(coordinates);
+
+  //add it to the map
+});
+
+
+// function showPosition(position){
+//   var latitude = position.coords.latitude;
+//   var longitude = position.coords.longitude;
+//   var latlon = latitude+','+longitude;
+//   var mapImage = "https://maps.googleapis.com/maps/api/staticmap?center="
+// +latlon+"&zoom=14&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
+//   console.log(mapImage);
+//   geolocation.innerHTML = '<img src="'+mapImage+'">';
+  
+//  console.log(position);
+// }
