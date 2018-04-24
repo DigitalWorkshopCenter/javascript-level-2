@@ -13,3 +13,5 @@
  - Extra Credit: Add a button to add your current location to the map
  - Extra Extra Credit: Clear all the places off the map
 
+# Class 5 Final Example
+ - Created a github page for the final example here: https://digitalworkshopcenter.github.io/javascript-level-2/Class5/map.html
